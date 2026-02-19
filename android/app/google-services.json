@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "175846833247",
+    "project_id": "undercover-game-app",
+    "storage_bucket": "undercover-game-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175846833247:android:a193d236e1e03d12702fea",
+        "android_client_info": {
+          "package_name": "com.example.undercover_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcReQrCL6UY_bcI-BsIglvleL0wnJVEBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
