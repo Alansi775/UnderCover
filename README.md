@@ -4,10 +4,19 @@ A production-quality Flutter party game based on the classic social deduction ga
 
 Built with clean architecture, modular code structure, and designed for scalability.
 
+## Live Demo
+
+A deployed version is available for immediate testing:
+
+**https://undercover-game-app.web.app**
+
+Open on any device with a modern browser. No installation required.
+
 ---
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [Getting Started](#getting-started)
 - [Running the App](#running-the-app)
 - [Gameplay Walkthrough](#gameplay-walkthrough)
