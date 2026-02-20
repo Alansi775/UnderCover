@@ -33,7 +33,7 @@ Built with clean architecture, modular code structure, and designed for scalabil
 
 ```bash
 git clone https://github.com/Alansi775/UnderCover.git
-cd undercover_game
+cd UnderCover
 flutter pub get
 ```
 
