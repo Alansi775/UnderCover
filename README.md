@@ -32,7 +32,7 @@ Built with clean architecture, modular code structure, and designed for scalabil
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/undercover_game.git
+git clone https://github.com/Alansi775/undercover_game.git
 cd undercover_game
 flutter pub get
 ```
