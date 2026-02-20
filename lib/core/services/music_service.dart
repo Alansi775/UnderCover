@@ -36,13 +36,19 @@ class MusicService extends GetxService {
   }
 
   Future<void> _fadeIn() async {
+    if (isMuted.value) return;
     double vol = 0;
-    final target = isMuted.value ? 0.0 : 1.0;
-    while (vol < target) {
-        vol += 0.02;
-        if (vol > target) vol = target;
+    while (vol < 1.0) {
+      vol += 0.02;
+      if (vol > 1.0) vol = 1.0;
+      try {
         await _player.setVolume(vol);
-        await Future.delayed(const Duration(milliseconds: 40));
+      } catch (_) {
+        // Safari may not support smooth volume changes
+        await _player.setVolume(1.0);
+        return;
+      }
+      await Future.delayed(const Duration(milliseconds: 40));
     }
   }
 
@@ -50,9 +56,9 @@ class MusicService extends GetxService {
   void toggleMute() {
     isMuted.value = !isMuted.value;
     if (isMuted.value) {
-      _player.setVolume(0);
+      _player.pause();
     } else {
-      _player.setVolume(1.0);
+      _player.resume();
     }
   }
 
@@ -60,12 +66,21 @@ class MusicService extends GetxService {
   Future<void> fadeOutAndStop() async {
     if (!isPlaying.value) return;
 
-    // Fade from current volume to 0
-    double vol = isMuted.value ? 0 : 1.0;
+    if (isMuted.value) {
+      await _player.stop();
+      isPlaying.value = false;
+      return;
+    }
+
+    double vol = 1.0;
     while (vol > 0) {
       vol -= 0.05;
       if (vol < 0) vol = 0;
-      await _player.setVolume(vol);
+      try {
+        await _player.setVolume(vol);
+      } catch (_) {
+        break;
+      }
       await Future.delayed(const Duration(milliseconds: 50));
     }
 
@@ -77,6 +92,10 @@ class MusicService extends GetxService {
   Future<void> resumeMusic() async {
     isPlaying.value = false;
     isMuted.value = false;
-    await play();
+    try {
+      await play();
+    } catch (_) {
+      // Silently handle Safari audio restrictions
+    }
   }
 }
