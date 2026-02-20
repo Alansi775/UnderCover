@@ -123,15 +123,15 @@ The device prompts the group to pass it to the next player. Only when that playe
 
 Player A is assigned the Undercover role with the word "Poem". The role badge and word are displayed prominently with color-coded indicators (red for Undercover, blue for Citizen).
 
-![B is Citizen](assets/screenshots/B IS CITIZEN AND HIS WORD IS SONG.png)
+![B is Citizen](assets/screenshots/BISCITIZENANDHISWORDISSONG.png)
 
 Player B is a Citizen with the word "Song". Citizens receive one word from the pair while the Undercover receives the related but different word.
 
-![Pass Phone to C](assets/screenshots/PASS THE PHONE TO C.png)
+![Pass Phone to C](assets/screenshots/PASSTHEPHONETOC.png)
 
 The flow continues until all players have privately viewed their roles.
 
-![C is Citizen](assets/screenshots/C IS CETIZIN AND HIS WORD IS SONG.png)
+![C is Citizen](assets/screenshots/CISCETIZINANDHISWORDISSONG.png)
 
 Player C is also a Citizen with the word "Song".
 
@@ -139,27 +139,27 @@ Player C is also a Citizen with the word "Song".
 
 Players take turns describing their secret word without saying it directly.
 
-![Pass to A for Description](assets/screenshots/PASS THE PHONE TO A SO HE CAN CLICK I AM READY THEN EXPLAIN HIS WORD.png)
+![Pass to A for Description](assets/screenshots/PASSTHEPHONETOASOHECANCLICKIAMREADYTHENEXPLAINHISWORD.png)
 
 The device is passed to each player with a prompt to begin their turn.
 
-![A Describing](assets/screenshots/A IS EXPLAINING HIS WORD NOW THEN HE WILL CLICK DONE-NEXT PLAYER.png)
+![A Describing](assets/screenshots/AISEXPLAININGHISWORDNOWTHENHEWILLCLICKDONE-NEXTPLAYER.png)
 
 The active player describes their word verbally to the group. The screen shows instructions and a progress indicator of remaining turns.
 
-![A Done, Pass to B](assets/screenshots/A CLICKED DONE NOW PASS THE PHONE TO B SO HE CAN CLIKC I AM READY AND EXPLAINS HIS WORD.png)
+![A Done, Pass to B](assets/screenshots/ACLICKEDDONENOWPASSTHEPHONETOBSOHECANCLIKCIAMREADYANDEXPLAINSHISWORD.png)
 
 After finishing, the player taps "Done" and the device transitions to the next player.
 
-![B Describing](assets/screenshots/B EXPLAINING HIS WORD.png)
+![B Describing](assets/screenshots/BEXPLAININGHISWORD.png)
 
 Player B takes their turn describing their word.
 
-![B Done, Pass to C](assets/screenshots/B CLICKED DONE NOW PASS THE PHONE TO C SO HE CAN CLIKC I AM READY AND EXPLAINS HIS WORD.png)
+![B Done, Pass to C](assets/screenshots/BCLICKEDDONENOWPASSTHEPHONETOCSOHECANCLIKCIAMREADYANDEXPLAINSHISWORD.png)
 
 The flow continues through all active players.
 
-![C Describing](assets/screenshots/C EXPLAINING HIS WORD.png)
+![C Describing](assets/screenshots/CEXPLAININGHISWORD.png)
 
 Once all players have described their words, the game transitions to the voting phase.
 
@@ -167,43 +167,43 @@ Once all players have described their words, the game transitions to the voting 
 
 Each player privately votes for who they suspect is the Undercover.
 
-![Pass to A for Voting](assets/screenshots/NOW C CLICKED DONE AND NOW PASS THE PHONE TO A AND HE CAN CLICK I AM READY TO VOTE.png)
+![Pass to A for Voting](assets/screenshots/NOWCCLICKEDDONEANDNOWPASSTHEPHONETOAANDHECANCLICKIAMREADYTOVOTE.png)
 
 The pass-the-phone flow is repeated for voting.
 
-![A Votes for B](assets/screenshots/A IS VOTING NOW AND HE CHOOSED B.png)
+![A Votes for B](assets/screenshots/AISVOTINGNOWANDHECHOOSEDB.png)
 
 Player A selects their suspect from the list of other active players. A radio-style selection indicator confirms the choice before submission.
 
-![Pass to B for Voting](assets/screenshots/NOW A CLICKED DONE AND NOW PASS THE PHONE TO B AND HE CAN CLICK I AM READY TO VOTE.png)
+![Pass to B for Voting](assets/screenshots/NOWACLICKEDDONEANDNOWPASSTHEPHONETOBANDHECANCLICKIAMREADYTOVOTE.png)
 
 The device is passed to the next voter.
 
-![B Votes for C](assets/screenshots/B VOTED TO C.png)
+![B Votes for C](assets/screenshots/BVOTEDTOC.png)
 
 Player B casts their vote.
 
-![Pass to C for Voting](assets/screenshots/NOW B CLICKED DONE AND NOW PASS THE PHONE TO C AND HE CAN CLICK I AM READY TO VOTE.png)
+![Pass to C for Voting](assets/screenshots/NOWBCLICKEDDONEANDNOWPASSTHEPHONETOCANDHECANCLICKIAMREADYTOVOTE.png)
 
 Final voter receives the device.
 
-![C Votes for A](assets/screenshots/C VOTED TO A.png)
+![C Votes for A](assets/screenshots/CVOTEDTOA.png)
 
 Player C casts the final vote of the round.
 
 ### 8. Elimination or Tie
 
-![Tie](assets/screenshots/IT IS A TIE SCREEN APPEAR NOW THEY CAN CLICK CONTINUE TO REPEATE THE ROUND .png)
+![Tie](assets/screenshots/ITISATIESCREENAPPEARNOWTHEYCANCLICKCONTINUETOREPEATETHEROUND.png)
 
 If votes are evenly split, no player is eliminated and the game proceeds to the next round. This prevents unfair eliminations and adds strategic depth.
 
-![B Eliminated](assets/screenshots/THEY REPEATED THE ROUND AND B IS ELIMENATED.png)
+![B Eliminated](assets/screenshots/THEYREPEATEDTHEROUNDANDBISELIMENATED.png)
 
 In subsequent rounds, the player with the most votes is eliminated. The elimination screen shows the player's name and vote count.
 
 ### 9. Game Result
 
-![Undercover Wins](assets/screenshots/THE UNDER COVER WINS WHICH IS A SCREEN APPEAR AND PLAY AGAIN BUTTON DOWN OR BACK TO MENU.png)
+![Undercover Wins](assets/screenshots/THEUNDERCOVERWINSWHICHISASCREENAPPEARANDPLAYAGAINBUTTONDOWNORBACKTOMENU.png)
 
 The game ends when a win condition is met. Citizens win if the Undercover is eliminated. The Undercover wins if only two players remain. The result screen reveals the Undercover's identity, the word pair used, and provides options to play again or return to the main menu.
 
