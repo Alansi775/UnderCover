@@ -16,28 +16,38 @@ class EliminationView extends StatelessWidget {
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
-          child: ResponsiveBody(
-            child: Obx(() {
-              final eliminated = controller.eliminatedPlayer.value;
-              final isTie = controller.isTie.value;
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppDimens.maxContentWidth,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.paddingLG,
+                ),
+                child: Obx(() {
+                  final eliminated = controller.eliminatedPlayer.value;
+                  final isTie = controller.isTie.value;
 
-              return Column(
-                children: [
-                  const Spacer(),
-                  if (isTie)
-                    _buildTieScreen()
-                  else
-                    _buildEliminationScreen(eliminated!),
-                  const Spacer(),
-                  GradientButton(
-                    text: AppStrings.continueGame,
-                    icon: Icons.arrow_forward_rounded,
-                    onPressed: controller.continueAfterElimination,
-                  ).animate().fadeIn(delay: 1200.ms),
-                  const SizedBox(height: AppDimens.paddingLG),
-                ],
-              );
-            }),
+                  return Column(
+                    children: [
+                      const Spacer(flex: 2),
+                      if (isTie)
+                        _buildTieScreen()
+                      else
+                        _buildEliminationScreen(eliminated!),
+                      const Spacer(flex: 3),
+                      GradientButton(
+                        text: 'Continue',
+                        icon: Icons.arrow_forward_rounded,
+                        onPressed: controller.continueAfterElimination,
+                      ).animate().fadeIn(delay: 1000.ms),
+                      const SizedBox(height: AppDimens.paddingXL),
+                    ],
+                  );
+                }),
+              ),
+            ),
           ),
         ),
       ),
@@ -47,33 +57,46 @@ class EliminationView extends StatelessWidget {
   Widget _buildTieScreen() {
     return Column(
       children: [
-        const Icon(
-          Icons.balance_rounded,
-          size: 80,
-          color: AppColors.warning,
+        Container(
+          width: 72,
+          height: 72,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: AppColors.gray700,
+              width: 1.5,
+            ),
+          ),
+          child: const Icon(
+            Icons.balance_rounded,
+            size: 32,
+            color: AppColors.gray400,
+          ),
         ).animate().fadeIn().scale(
-              begin: const Offset(0.5, 0.5),
-              curve: Curves.elasticOut,
-              duration: 800.ms,
+              begin: const Offset(0.8, 0.8),
+              curve: Curves.easeOut,
+              duration: 500.ms,
             ),
         const SizedBox(height: AppDimens.paddingXL),
         Text(
-          AppStrings.noElimination,
+          "It's a Tie",
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontXXL,
-            fontWeight: FontWeight.w800,
-            color: AppColors.warning,
+            fontWeight: FontWeight.w700,
+            color: AppColors.white,
+            letterSpacing: -0.5,
           ),
-        ).animate().fadeIn(delay: 300.ms),
-        const SizedBox(height: AppDimens.paddingMD),
+        ).animate().fadeIn(delay: 250.ms),
+        const SizedBox(height: AppDimens.paddingSM),
         Text(
-          AppStrings.noEliminationDesc,
+          'No one is eliminated.\nProceeding to next round.',
           textAlign: TextAlign.center,
           style: GoogleFonts.inter(
-            fontSize: AppDimens.fontMD,
-            color: AppColors.textSecondary,
+            fontSize: AppDimens.fontSM,
+            color: AppColors.gray500,
+            height: 1.5,
           ),
-        ).animate().fadeIn(delay: 500.ms),
+        ).animate().fadeIn(delay: 400.ms),
       ],
     );
   }
@@ -82,65 +105,68 @@ class EliminationView extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 100,
-          height: 100,
+          width: 88,
+          height: 88,
           decoration: BoxDecoration(
-            color: AppColors.danger.withOpacity(0.15),
             shape: BoxShape.circle,
             border: Border.all(
               color: AppColors.danger.withOpacity(0.3),
-              width: 2,
+              width: 1.5,
             ),
           ),
           child: Center(
             child: PlayerAvatar(
               name: player.name,
-              size: 70,
+              size: 64,
               isEliminated: true,
             ),
           ),
         ).animate().fadeIn().scale(
-              begin: const Offset(0.5, 0.5),
-              curve: Curves.elasticOut,
-              duration: 800.ms,
+              begin: const Offset(0.8, 0.8),
+              curve: Curves.easeOut,
+              duration: 500.ms,
             ),
         const SizedBox(height: AppDimens.paddingXL),
         Text(
           player.name,
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontXXL,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w700,
+            color: AppColors.white,
+            letterSpacing: -0.5,
           ),
-        ).animate().fadeIn(delay: 400.ms),
+        ).animate().fadeIn(delay: 300.ms),
         const SizedBox(height: AppDimens.paddingSM),
         Text(
-          'has been eliminated!',
+          'has been eliminated',
           style: GoogleFonts.inter(
-            fontSize: AppDimens.fontLG,
+            fontSize: AppDimens.fontMD,
             color: AppColors.danger,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
+          ),
+        ).animate().fadeIn(delay: 450.ms),
+        const SizedBox(height: AppDimens.paddingLG),
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.paddingMD,
+            vertical: AppDimens.paddingSM,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.gray800,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(AppDimens.radiusFull),
+          ),
+          child: Text(
+            '${player.votesReceived} votes',
+            style: GoogleFonts.inter(
+              fontSize: AppDimens.fontSM,
+              color: AppColors.gray500,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ).animate().fadeIn(delay: 600.ms),
-        const SizedBox(height: AppDimens.paddingXL),
-        GlassCard(
-          padding: const EdgeInsets.all(AppDimens.paddingMD),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.how_to_vote_rounded,
-                  color: AppColors.textMuted, size: 20),
-              const SizedBox(width: AppDimens.paddingSM),
-              Text(
-                '${player.votesReceived} votes',
-                style: GoogleFonts.inter(
-                  fontSize: AppDimens.fontMD,
-                  color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ).animate().fadeIn(delay: 800.ms),
       ],
     );
   }

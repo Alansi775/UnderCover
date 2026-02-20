@@ -10,7 +10,7 @@ class AnimatedBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: AppColors.backgroundGradient,
+        color: AppColors.darkBg,
       ),
       child: child,
     );

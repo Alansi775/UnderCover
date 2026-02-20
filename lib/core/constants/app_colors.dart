@@ -3,51 +3,55 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // Primary palette
-  static const Color primary = Color(0xFF6C5CE7);
-  static const Color primaryLight = Color(0xFF8B7CF6);
-  static const Color primaryDark = Color(0xFF5A4BD1);
+  // Primary - Clean Blue
+  static const Color primary = Color(0xFF2563EB);
+  static const Color primaryLight = Color(0xFF3B82F6);
+  static const Color primarySoft = Color(0xFFDBEAFE);
 
-  // Accent
-  static const Color accent = Color(0xFFFF6B6B);
-  static const Color accentLight = Color(0xFFFF8E8E);
+  // Core - Black & White
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+  static const Color darkBg = Color(0xFF0A0A0A);
+  static const Color darkCard = Color(0xFF141414);
+  static const Color darkSurface = Color(0xFF1C1C1E);
 
-  // Neutrals
-  static const Color background = Color(0xFF0F0F23);
-  static const Color surface = Color(0xFF1A1A2E);
-  static const Color surfaceLight = Color(0xFF25254A);
-  static const Color cardDark = Color(0xFF16213E);
+  // Grays
+  static const Color gray50 = Color(0xFFFAFAFA);
+  static const Color gray100 = Color(0xFFF5F5F5);
+  static const Color gray200 = Color(0xFFE5E5E5);
+  static const Color gray300 = Color(0xFFD4D4D4);
+  static const Color gray400 = Color(0xFFA3A3A3);
+  static const Color gray500 = Color(0xFF737373);
+  static const Color gray600 = Color(0xFF525252);
+  static const Color gray700 = Color(0xFF404040);
+  static const Color gray800 = Color(0xFF262626);
+  static const Color gray900 = Color(0xFF171717);
 
-  // Text
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFB0B0D0);
-  static const Color textMuted = Color(0xFF6B6B8D);
-
-  // Status
-  static const Color success = Color(0xFF00D2A0);
-  static const Color danger = Color(0xFFFF6B6B);
-  static const Color warning = Color(0xFFFFD93D);
+  // Status - Minimal
+  static const Color success = Color(0xFF22C55E);
+  static const Color danger = Color(0xFFEF4444);
+  static const Color warning = Color(0xFFF59E0B);
 
   // Roles
-  static const Color citizenColor = Color(0xFF00D2A0);
-  static const Color undercoverColor = Color(0xFFFF6B6B);
+  static const Color citizenColor = Color(0xFF2563EB);
+  static const Color undercoverColor = Color(0xFFEF4444);
 
   // Gradients
-  static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFF6C5CE7), Color(0xFF00D2A0)],
+  static const LinearGradient subtleGradient = LinearGradient(
+    colors: [Color(0xFF1C1C1E), Color(0xFF0A0A0A)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static const LinearGradient blueGradient = LinearGradient(
+    colors: [Color(0xFF2563EB), Color(0xFF1D4ED8)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient dangerGradient = LinearGradient(
-    colors: [Color(0xFFFF6B6B), Color(0xFFEE5A24)],
+    colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient backgroundGradient = LinearGradient(
-    colors: [Color(0xFF0F0F23), Color(0xFF1A1A2E)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
   );
 }

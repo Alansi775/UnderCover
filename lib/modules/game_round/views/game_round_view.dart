@@ -14,8 +14,18 @@ class GameRoundView extends GetView<GameRoundController> {
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
-          child: ResponsiveBody(
-            child: Obx(() => _buildContent()),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppDimens.maxContentWidth,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.paddingLG,
+                ),
+                child: Obx(() => _buildContent()),
+              ),
+            ),
           ),
         ),
       ),
@@ -33,47 +43,51 @@ class GameRoundView extends GetView<GameRoundController> {
     final player = controller.currentPlayer;
     return Column(
       children: [
-        _buildRoundHeader(),
-        const Spacer(),
+        const SizedBox(height: AppDimens.paddingMD),
+        _buildRoundBadge(),
+        const Spacer(flex: 2),
         Icon(
           Icons.phone_android_rounded,
-          size: 56,
-          color: AppColors.primary.withOpacity(0.6),
+          size: 44,
+          color: AppColors.gray700,
         ).animate().fadeIn().scale(
-              begin: const Offset(0.8, 0.8),
-              curve: Curves.elasticOut,
+              begin: const Offset(0.9, 0.9),
+              curve: Curves.easeOut,
             ),
-        const SizedBox(height: AppDimens.paddingLG),
+        const SizedBox(height: AppDimens.paddingXL),
         Text(
           'Pass the phone to',
           style: GoogleFonts.inter(
-            fontSize: AppDimens.fontMD,
-            color: AppColors.textSecondary,
+            fontSize: AppDimens.fontSM,
+            color: AppColors.gray500,
+            letterSpacing: 1,
           ),
-        ).animate().fadeIn(delay: 200.ms),
+        ).animate().fadeIn(delay: 150.ms),
         const SizedBox(height: AppDimens.paddingSM),
         Text(
           player.name,
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontXXL,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w700,
+            color: AppColors.white,
+            letterSpacing: -0.5,
           ),
-        ).animate().fadeIn(delay: 300.ms),
+        ).animate().fadeIn(delay: 250.ms),
         const SizedBox(height: AppDimens.paddingSM),
         Text(
-          "It's your turn to describe",
+          'Your turn to describe',
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontSM,
-            color: AppColors.textMuted,
+            color: AppColors.gray600,
           ),
-        ).animate().fadeIn(delay: 400.ms),
-        const Spacer(),
+        ).animate().fadeIn(delay: 350.ms),
+        const Spacer(flex: 3),
         GradientButton(
           text: "I'm Ready",
-          icon: Icons.check_circle_outline_rounded,
+          icon: Icons.check_rounded,
           onPressed: controller.startDescribing,
-        ).animate().fadeIn(delay: 500.ms),
-        const SizedBox(height: AppDimens.paddingLG),
+        ).animate().fadeIn(delay: 450.ms),
+        const SizedBox(height: AppDimens.paddingXL),
       ],
     );
   }
@@ -85,66 +99,69 @@ class GameRoundView extends GetView<GameRoundController> {
 
     return Column(
       children: [
-        _buildRoundHeader(),
-        const SizedBox(height: AppDimens.paddingLG),
+        const SizedBox(height: AppDimens.paddingMD),
+        _buildRoundBadge(),
+        const SizedBox(height: AppDimens.paddingXL),
+        // Player info
         Row(
           children: [
-            PlayerAvatar(name: player.name, size: 48),
+            PlayerAvatar(name: player.name, size: 40),
             const SizedBox(width: AppDimens.paddingMD),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    player.name,
-                    style: GoogleFonts.inter(
-                      fontSize: AppDimens.fontLG,
-                      fontWeight: FontWeight.w700,
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  player.name,
+                  style: GoogleFonts.inter(
+                    fontSize: AppDimens.fontLG,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
                   ),
-                  Text(
-                    'Turn $turnProgress',
-                    style: GoogleFonts.inter(
-                      fontSize: AppDimens.fontSM,
-                      color: AppColors.textMuted,
-                    ),
+                ),
+                Text(
+                  'Turn $turnProgress',
+                  style: GoogleFonts.inter(
+                    fontSize: AppDimens.fontXS,
+                    color: AppColors.gray500,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ).animate().fadeIn(),
         const SizedBox(height: AppDimens.paddingXL),
+        // Instructions
         GlassCard(
           padding: const EdgeInsets.all(AppDimens.paddingLG),
           child: Column(
             children: [
-              const Icon(
-                Icons.chat_bubble_outline_rounded,
-                size: 40,
-                color: AppColors.primary,
+              Icon(
+                Icons.chat_outlined,
+                size: 32,
+                color: AppColors.gray500,
               ),
               const SizedBox(height: AppDimens.paddingMD),
               Text(
                 'Describe Your Word',
                 style: GoogleFonts.inter(
                   fontSize: AppDimens.fontLG,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
                 ),
               ),
               const SizedBox(height: AppDimens.paddingSM),
               Text(
-                'Describe your secret word to the other players without saying the word itself. Be creative but not too obvious!',
+                'Describe your secret word without saying it. Be creative but not too obvious.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   fontSize: AppDimens.fontSM,
-                  color: AppColors.textSecondary,
+                  color: AppColors.gray500,
                   height: 1.5,
                 ),
               ),
             ],
           ),
-        ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1),
+        ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.05),
         const Spacer(),
         _buildPlayerOrder(),
         const SizedBox(height: AppDimens.paddingLG),
@@ -153,45 +170,40 @@ class GameRoundView extends GetView<GameRoundController> {
               ? 'Start Voting'
               : 'Done — Next Player',
           icon: controller.isLastTurn
-              ? Icons.how_to_vote_rounded
+              ? Icons.how_to_vote_outlined
               : Icons.arrow_forward_rounded,
           onPressed: controller.finishTurn,
         ).animate().fadeIn(delay: 400.ms),
-        const SizedBox(height: AppDimens.paddingLG),
+        const SizedBox(height: AppDimens.paddingXL),
       ],
     );
   }
 
-  Widget _buildRoundHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.paddingMD,
-            vertical: AppDimens.paddingSM,
-          ),
-          decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(AppDimens.radiusFull),
-          ),
-          child: Text(
-            '${AppStrings.roundTitle} ${controller.roundNumber}',
-            style: GoogleFonts.inter(
-              fontSize: AppDimens.fontSM,
-              fontWeight: FontWeight.w700,
-              color: AppColors.primary,
-              letterSpacing: 1,
-            ),
-          ),
+  Widget _buildRoundBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimens.paddingMD,
+        vertical: AppDimens.paddingXS,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.gray800, width: 1),
+        borderRadius: BorderRadius.circular(AppDimens.radiusFull),
+      ),
+      child: Text(
+        'Round ${controller.roundNumber}',
+        style: GoogleFonts.inter(
+          fontSize: AppDimens.fontXS,
+          fontWeight: FontWeight.w600,
+          color: AppColors.gray400,
+          letterSpacing: 1,
         ),
-      ],
+      ),
     );
   }
 
   Widget _buildPlayerOrder() {
     return SizedBox(
-      height: 48,
+      height: 44,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
@@ -203,15 +215,12 @@ class GameRoundView extends GetView<GameRoundController> {
             final isDone =
                 index < controller.currentTurnIndex.value;
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                child: PlayerAvatar(
-                  name: player.name,
-                  size: isCurrent ? 40 : 32,
-                  isSelected: isCurrent,
-                  isEliminated: isDone,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: PlayerAvatar(
+                name: player.name,
+                size: isCurrent ? 38 : 30,
+                isSelected: isCurrent,
+                isEliminated: isDone,
               ),
             );
           },

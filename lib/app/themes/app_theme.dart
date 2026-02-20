@@ -7,17 +7,17 @@ class AppTheme {
 
   static ThemeData get darkTheme => ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.background,
+        scaffoldBackgroundColor: AppColors.darkBg,
         colorScheme: const ColorScheme.dark(
           primary: AppColors.primary,
-          secondary: AppColors.accent,
-          surface: AppColors.surface,
+          secondary: AppColors.primaryLight,
+          surface: AppColors.darkSurface,
         ),
         textTheme: GoogleFonts.interTextTheme(
           ThemeData.dark().textTheme,
         ).apply(
-          bodyColor: AppColors.textPrimary,
-          displayColor: AppColors.textPrimary,
+          bodyColor: AppColors.white,
+          displayColor: AppColors.white,
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -26,21 +26,21 @@ class AppTheme {
           titleTextStyle: GoogleFonts.inter(
             fontSize: AppDimens.fontLG,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: AppColors.white,
           ),
-          iconTheme: const IconThemeData(color: AppColors.textPrimary),
+          iconTheme: const IconThemeData(color: AppColors.white),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.white,
+            foregroundColor: AppColors.black,
             elevation: 0,
             padding: const EdgeInsets.symmetric(
-              horizontal: AppDimens.paddingXL,
+              horizontal: AppDimens.paddingLG,
               vertical: AppDimens.paddingMD,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppDimens.radiusLG),
+              borderRadius: BorderRadius.circular(AppDimens.radiusFull),
             ),
             textStyle: GoogleFonts.inter(
               fontSize: AppDimens.fontMD,
@@ -50,14 +50,16 @@ class AppTheme {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: AppColors.surfaceLight,
+          fillColor: AppColors.darkCard,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusMD),
-            borderSide: BorderSide.none,
+            borderSide: BorderSide(
+                color: AppColors.gray800, width: 1),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusMD),
-            borderSide: BorderSide.none,
+            borderSide: BorderSide(
+                color: AppColors.gray800, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusMD),
@@ -69,12 +71,12 @@ class AppTheme {
             vertical: AppDimens.paddingMD,
           ),
           hintStyle: GoogleFonts.inter(
-            color: AppColors.textMuted,
+            color: AppColors.gray600,
             fontSize: AppDimens.fontMD,
           ),
         ),
         cardTheme: CardThemeData(
-          color: AppColors.surface,
+          color: AppColors.darkCard,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusLG),

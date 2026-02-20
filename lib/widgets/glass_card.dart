@@ -22,12 +22,12 @@ class GlassCard extends StatelessWidget {
     final card = Container(
       padding: padding ?? const EdgeInsets.all(AppDimens.paddingMD),
       decoration: BoxDecoration(
-        color: color ?? AppColors.surface.withOpacity(0.8),
+        color: color ?? AppColors.darkCard,
         borderRadius: BorderRadius.circular(AppDimens.radiusLG),
         border: border ??
             Border.all(
-              color: AppColors.surfaceLight.withOpacity(0.5),
-              width: 1,
+              color: AppColors.gray800,
+              width: 0.5,
             ),
       ),
       child: child,

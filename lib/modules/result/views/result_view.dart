@@ -14,25 +14,35 @@ class ResultView extends GetView<ResultController> {
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
-          child: ResponsiveBody(
-            child: Column(
-              children: [
-                const Spacer(),
-                _buildResultIcon(),
-                const SizedBox(height: AppDimens.paddingXL),
-                _buildResultTitle(),
-                const SizedBox(height: AppDimens.paddingSM),
-                _buildResultSubtitle(),
-                const SizedBox(height: AppDimens.paddingXXL),
-                _buildUndercoverReveal(),
-                const SizedBox(height: AppDimens.paddingLG),
-                _buildWordPairReveal(),
-                const SizedBox(height: AppDimens.paddingLG),
-                _buildPlayerSummary(),
-                const Spacer(),
-                _buildButtons(),
-                const SizedBox(height: AppDimens.paddingLG),
-              ],
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppDimens.maxContentWidth,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.paddingLG,
+                ),
+                child: Column(
+                  children: [
+                    const Spacer(flex: 2),
+                    _buildResultIcon(),
+                    const SizedBox(height: AppDimens.paddingXL),
+                    _buildResultTitle(),
+                    const SizedBox(height: AppDimens.paddingSM),
+                    _buildResultSubtitle(),
+                    const SizedBox(height: AppDimens.paddingXXL),
+                    _buildUndercoverReveal(),
+                    const SizedBox(height: AppDimens.paddingMD),
+                    _buildWordPairReveal(),
+                    const SizedBox(height: AppDimens.paddingLG),
+                    _buildPlayerSummary(),
+                    const Spacer(flex: 3),
+                    _buildButtons(),
+                    const SizedBox(height: AppDimens.paddingXL),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -43,64 +53,57 @@ class ResultView extends GetView<ResultController> {
   Widget _buildResultIcon() {
     final won = controller.citizensWon;
     return Container(
-      width: 120,
-      height: 120,
+      width: 80,
+      height: 80,
       decoration: BoxDecoration(
-        gradient: won
-            ? AppColors.primaryGradient
-            : AppColors.dangerGradient,
+        color: won
+            ? AppColors.primary.withOpacity(0.1)
+            : AppColors.danger.withOpacity(0.1),
         shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: (won
-                    ? AppColors.citizenColor
-                    : AppColors.undercoverColor)
-                .withOpacity(0.4),
-            blurRadius: 32,
-            spreadRadius: 8,
-          ),
-        ],
+        border: Border.all(
+          color: won
+              ? AppColors.primary.withOpacity(0.2)
+              : AppColors.danger.withOpacity(0.2),
+          width: 1.5,
+        ),
       ),
       child: Icon(
-        won ? Icons.shield_rounded : Icons.visibility_off_rounded,
-        size: 56,
-        color: Colors.white,
+        won ? Icons.shield_outlined : Icons.visibility_off_rounded,
+        size: 36,
+        color: won ? AppColors.primary : AppColors.danger,
       ),
     )
         .animate()
-        .fadeIn(duration: 600.ms)
+        .fadeIn(duration: 500.ms)
         .scale(
-          begin: const Offset(0.3, 0.3),
-          curve: Curves.elasticOut,
-          duration: 1000.ms,
+          begin: const Offset(0.8, 0.8),
+          curve: Curves.easeOut,
+          duration: 500.ms,
         );
   }
 
   Widget _buildResultTitle() {
     return Text(
-      controller.citizensWon
-          ? AppStrings.citizensWin
-          : AppStrings.undercoverWins,
+      controller.citizensWon ? 'Citizens Win' : 'Undercover Wins',
       style: GoogleFonts.inter(
         fontSize: AppDimens.fontXXL,
-        fontWeight: FontWeight.w800,
-        color: controller.citizensWon
-            ? AppColors.citizenColor
-            : AppColors.undercoverColor,
+        fontWeight: FontWeight.w700,
+        color: AppColors.white,
+        letterSpacing: -0.5,
       ),
-    ).animate().fadeIn(delay: 400.ms);
+    ).animate().fadeIn(delay: 300.ms);
   }
 
   Widget _buildResultSubtitle() {
     return Text(
       controller.citizensWon
-          ? AppStrings.citizensWinDesc
-          : AppStrings.undercoverWinsDesc,
+          ? 'The Undercover has been found'
+          : 'The Undercover survived',
       style: GoogleFonts.inter(
-        fontSize: AppDimens.fontMD,
-        color: AppColors.textSecondary,
+        fontSize: AppDimens.fontSM,
+        color: AppColors.gray500,
       ),
-    ).animate().fadeIn(delay: 500.ms);
+    ).animate().fadeIn(delay: 400.ms);
   }
 
   Widget _buildUndercoverReveal() {
@@ -108,43 +111,41 @@ class ResultView extends GetView<ResultController> {
     if (undercover == null) return const SizedBox.shrink();
 
     return GlassCard(
-      padding: const EdgeInsets.all(AppDimens.paddingLG),
-      border: Border.all(
-        color: AppColors.undercoverColor.withOpacity(0.3),
-      ),
+      padding: const EdgeInsets.all(AppDimens.paddingMD),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           PlayerAvatar(
             name: undercover.name,
-            size: 44,
-            color: AppColors.undercoverColor,
+            size: 40,
+            color: AppColors.danger,
           ),
           const SizedBox(width: AppDimens.paddingMD),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.theUndercoverWas,
+                'THE UNDERCOVER',
                 style: GoogleFonts.inter(
                   fontSize: AppDimens.fontXS,
-                  color: AppColors.textMuted,
-                  letterSpacing: 1,
+                  color: AppColors.gray600,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
+              const SizedBox(height: 2),
               Text(
                 undercover.name,
                 style: GoogleFonts.inter(
                   fontSize: AppDimens.fontLG,
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.undercoverColor,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.white,
                 ),
               ),
             ],
           ),
         ],
       ),
-    ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2);
+    ).animate().fadeIn(delay: 550.ms).slideY(begin: 0.05);
   }
 
   Widget _buildWordPairReveal() {
@@ -152,39 +153,40 @@ class ResultView extends GetView<ResultController> {
     if (pair == null) return const SizedBox.shrink();
 
     return GlassCard(
-      padding: const EdgeInsets.all(AppDimens.paddingLG),
+      padding: const EdgeInsets.all(AppDimens.paddingMD),
       child: Column(
         children: [
           Text(
-            AppStrings.theWordPairWas,
+            'WORD PAIR',
             style: GoogleFonts.inter(
               fontSize: AppDimens.fontXS,
-              color: AppColors.textMuted,
-              letterSpacing: 1,
+              color: AppColors.gray600,
+              letterSpacing: 2,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: AppDimens.paddingSM),
+          const SizedBox(height: AppDimens.paddingMD),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildWordChip(pair.wordA, AppColors.citizenColor),
+              _buildWordChip(pair.wordA, AppColors.primary),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimens.paddingMD),
                 child: Text(
                   '—',
                   style: GoogleFonts.inter(
-                    fontSize: AppDimens.fontLG,
-                    color: AppColors.textMuted,
+                    fontSize: AppDimens.fontMD,
+                    color: AppColors.gray700,
                   ),
                 ),
               ),
-              _buildWordChip(pair.wordB, AppColors.undercoverColor),
+              _buildWordChip(pair.wordB, AppColors.danger),
             ],
           ),
         ],
       ),
-    ).animate().fadeIn(delay: 900.ms).slideY(begin: 0.2);
+    ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.05);
   }
 
   Widget _buildWordChip(String word, Color color) {
@@ -194,15 +196,17 @@ class ResultView extends GetView<ResultController> {
         vertical: AppDimens.paddingSM,
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withOpacity(0.08),
         borderRadius: BorderRadius.circular(AppDimens.radiusMD),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(
+          color: color.withOpacity(0.15),
+        ),
       ),
       child: Text(
         word,
         style: GoogleFonts.inter(
-          fontSize: AppDimens.fontMD,
-          fontWeight: FontWeight.w700,
+          fontSize: AppDimens.fontSM,
+          fontWeight: FontWeight.w600,
           color: color,
         ),
       ),
@@ -211,7 +215,7 @@ class ResultView extends GetView<ResultController> {
 
   Widget _buildPlayerSummary() {
     return SizedBox(
-      height: 48,
+      height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: controller.allPlayers.map((player) {
@@ -219,38 +223,32 @@ class ResultView extends GetView<ResultController> {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: PlayerAvatar(
               name: player.name,
-              size: 36,
+              size: 32,
               isEliminated: player.isEliminated,
-              color: player.isUndercover
-                  ? AppColors.undercoverColor
-                  : null,
+              color: player.isUndercover ? AppColors.danger : null,
             ),
           );
         }).toList(),
       ),
-    ).animate().fadeIn(delay: 1100.ms);
+    ).animate().fadeIn(delay: 850.ms);
   }
 
   Widget _buildButtons() {
     return Column(
       children: [
         GradientButton(
-          text: AppStrings.playAgain,
+          text: 'Play Again',
           icon: Icons.replay_rounded,
           onPressed: controller.playAgain,
         ),
         const SizedBox(height: AppDimens.paddingSM),
-        TextButton(
+        GradientButton(
+          text: 'Back to Menu',
+          icon: Icons.home_outlined,
+          isOutlined: true,
           onPressed: controller.backToMenu,
-          child: Text(
-            AppStrings.backToMenu,
-            style: GoogleFonts.inter(
-              color: AppColors.textSecondary,
-              fontSize: AppDimens.fontMD,
-            ),
-          ),
         ),
       ],
-    ).animate().fadeIn(delay: 1300.ms);
+    ).animate().fadeIn(delay: 1000.ms);
   }
 }

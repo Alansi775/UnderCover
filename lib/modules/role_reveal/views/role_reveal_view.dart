@@ -15,8 +15,18 @@ class RoleRevealView extends GetView<RoleRevealController> {
     return Scaffold(
       body: AnimatedBackground(
         child: SafeArea(
-          child: ResponsiveBody(
-            child: Obx(() => _buildContent()),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppDimens.maxContentWidth,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.paddingLG,
+                ),
+                child: Obx(() => _buildContent()),
+              ),
+            ),
           ),
         ),
       ),
@@ -37,41 +47,44 @@ class RoleRevealView extends GetView<RoleRevealController> {
     final player = controller.currentPlayer;
     return Column(
       children: [
+        const SizedBox(height: AppDimens.paddingMD),
         _buildProgress(),
-        const Spacer(),
+        const Spacer(flex: 2),
         Icon(
           Icons.phone_android_rounded,
-          size: 64,
-          color: AppColors.primary.withOpacity(0.6),
+          size: 44,
+          color: AppColors.gray700,
         ).animate().fadeIn().scale(
-              begin: const Offset(0.8, 0.8),
-              duration: 600.ms,
-              curve: Curves.elasticOut,
+              begin: const Offset(0.9, 0.9),
+              curve: Curves.easeOut,
+              duration: 400.ms,
             ),
         const SizedBox(height: AppDimens.paddingXL),
         Text(
-          AppStrings.passPhone,
+          'Pass the phone to',
           style: GoogleFonts.inter(
-            fontSize: AppDimens.fontMD,
-            color: AppColors.textSecondary,
+            fontSize: AppDimens.fontSM,
+            color: AppColors.gray500,
+            letterSpacing: 1,
           ),
-        ).animate().fadeIn(delay: 200.ms),
+        ).animate().fadeIn(delay: 150.ms),
         const SizedBox(height: AppDimens.paddingSM),
         Text(
           player.name,
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontXXL,
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+            color: AppColors.white,
+            letterSpacing: -0.5,
           ),
-        ).animate().fadeIn(delay: 300.ms),
-        const Spacer(),
+        ).animate().fadeIn(delay: 250.ms),
+        const Spacer(flex: 3),
         GradientButton(
-          text: AppStrings.tapToReveal,
+          text: 'Reveal My Role',
           icon: Icons.visibility_rounded,
           onPressed: controller.revealRole,
-        ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.3),
-        const SizedBox(height: AppDimens.paddingLG),
+        ).animate().fadeIn(delay: 400.ms),
+        const SizedBox(height: AppDimens.paddingXL),
       ],
     );
   }
@@ -82,98 +95,79 @@ class RoleRevealView extends GetView<RoleRevealController> {
 
     return Column(
       children: [
+        const SizedBox(height: AppDimens.paddingMD),
         _buildProgress(),
-        const Spacer(),
+        const Spacer(flex: 2),
+        // Role label
         Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.paddingLG,
+            horizontal: AppDimens.paddingMD,
             vertical: AppDimens.paddingSM,
           ),
           decoration: BoxDecoration(
             color: isUndercover
-                ? AppColors.undercoverColor.withOpacity(0.15)
-                : AppColors.citizenColor.withOpacity(0.15),
+                ? AppColors.danger.withOpacity(0.1)
+                : AppColors.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(AppDimens.radiusFull),
             border: Border.all(
               color: isUndercover
-                  ? AppColors.undercoverColor.withOpacity(0.3)
-                  : AppColors.citizenColor.withOpacity(0.3),
+                  ? AppColors.danger.withOpacity(0.2)
+                  : AppColors.primary.withOpacity(0.2),
             ),
           ),
           child: Text(
-            isUndercover ? AppStrings.undercover : AppStrings.citizen,
+            isUndercover ? 'UNDERCOVER' : 'CITIZEN',
             style: GoogleFonts.inter(
-              fontSize: AppDimens.fontMD,
+              fontSize: AppDimens.fontXS,
               fontWeight: FontWeight.w700,
               color: isUndercover
-                  ? AppColors.undercoverColor
-                  : AppColors.citizenColor,
-              letterSpacing: 2,
+                  ? AppColors.danger
+                  : AppColors.primary,
+              letterSpacing: 3,
             ),
           ),
-        ).animate().fadeIn().scale(begin: const Offset(0.8, 0.8)),
+        ).animate().fadeIn().scale(begin: const Offset(0.9, 0.9)),
         const SizedBox(height: AppDimens.paddingXL),
-        Icon(
-          isUndercover
-              ? Icons.visibility_off_rounded
-              : Icons.shield_rounded,
-          size: 72,
-          color: isUndercover
-              ? AppColors.undercoverColor
-              : AppColors.citizenColor,
-        ).animate().fadeIn(delay: 200.ms).scale(
-              begin: const Offset(0.5, 0.5),
-              curve: Curves.elasticOut,
-              duration: 800.ms,
-            ),
-        const SizedBox(height: AppDimens.paddingXL),
+        // Word
         Text(
-          AppStrings.yourWord,
-          style: GoogleFonts.inter(
-            fontSize: AppDimens.fontSM,
-            color: AppColors.textSecondary,
-            letterSpacing: 1,
-          ),
-        ).animate().fadeIn(delay: 400.ms),
-        const SizedBox(height: AppDimens.paddingSM),
-        GlassCard(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.paddingXL,
-            vertical: AppDimens.paddingLG,
-          ),
-          border: Border.all(
-            color: (isUndercover
-                    ? AppColors.undercoverColor
-                    : AppColors.citizenColor)
-                .withOpacity(0.3),
-          ),
-          child: Text(
-            player.secretWord,
-            style: GoogleFonts.inter(
-              fontSize: AppDimens.fontXXL,
-              fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ).animate().fadeIn(delay: 500.ms).scale(
-            begin: const Offset(0.9, 0.9)),
-        const SizedBox(height: AppDimens.paddingSM),
-        Text(
-          'Remember this word!',
+          'Your word',
           style: GoogleFonts.inter(
             fontSize: AppDimens.fontXS,
-            color: AppColors.textMuted,
+            color: AppColors.gray600,
+            letterSpacing: 2,
           ),
-        ).animate().fadeIn(delay: 700.ms),
-        const Spacer(),
+        ).animate().fadeIn(delay: 200.ms),
+        const SizedBox(height: AppDimens.paddingSM),
+        Text(
+          player.secretWord,
+          style: GoogleFonts.inter(
+            fontSize: AppDimens.fontDisplay,
+            fontWeight: FontWeight.w800,
+            color: AppColors.white,
+            letterSpacing: -1,
+            height: 1,
+          ),
+        ).animate().fadeIn(delay: 350.ms).scale(
+              begin: const Offset(0.95, 0.95),
+              curve: Curves.easeOut,
+            ),
+        const SizedBox(height: AppDimens.paddingLG),
+        Text(
+          'Remember this word',
+          style: GoogleFonts.inter(
+            fontSize: AppDimens.fontXS,
+            color: AppColors.gray600,
+          ),
+        ).animate().fadeIn(delay: 500.ms),
+        const Spacer(flex: 3),
         GradientButton(
-          text: controller.isLastPlayer ? 'Start Game' : AppStrings.gotIt,
+          text: controller.isLastPlayer ? 'Start Game' : 'Got it',
           icon: controller.isLastPlayer
-              ? Icons.play_arrow_rounded
+              ? Icons.arrow_forward_rounded
               : Icons.check_rounded,
           onPressed: controller.confirmAndNext,
-        ).animate().fadeIn(delay: 800.ms),
-        const SizedBox(height: AppDimens.paddingLG),
+        ).animate().fadeIn(delay: 600.ms),
+        const SizedBox(height: AppDimens.paddingXL),
       ],
     );
   }
@@ -185,19 +179,23 @@ class RoleRevealView extends GetView<RoleRevealController> {
       return Column(
         children: [
           Text(
-            'Player $current of $total',
+            '$current of $total',
             style: GoogleFonts.inter(
-              fontSize: AppDimens.fontSM,
-              color: AppColors.textMuted,
+              fontSize: AppDimens.fontXS,
+              color: AppColors.gray600,
+              letterSpacing: 1,
             ),
           ),
           const SizedBox(height: AppDimens.paddingSM),
-          LinearProgressIndicator(
-            value: current / total,
-            backgroundColor: AppColors.surfaceLight,
-            valueColor:
-                const AlwaysStoppedAnimation<Color>(AppColors.primary),
-            borderRadius: BorderRadius.circular(4),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: LinearProgressIndicator(
+              value: current / total,
+              backgroundColor: AppColors.gray800,
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                  AppColors.white),
+              minHeight: 2,
+            ),
           ),
         ],
       );
