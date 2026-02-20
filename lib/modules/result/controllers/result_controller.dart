@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import '../../../core/services/game_controller.dart';
 import '../../../data/models/models.dart';
 import '../../../app/routes/app_routes.dart';
+import '../../../core/services/music_service.dart';
 
 class ResultController extends GetxController {
   late final GameController _gameCtrl;
@@ -28,6 +29,7 @@ class ResultController extends GetxController {
 
   void backToMenu() {
     _gameCtrl.resetGame();
+    Get.find<MusicService>().resumeMusic();
     Get.offAllNamed(Routes.home);
   }
 }

@@ -1,0 +1,48 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="orbGrad" cx="40%" cy="38%" r="50%" fx="35%" fy="33%">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="35%" stop-color="#222222"/>
+      <stop offset="65%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <radialGradient id="smoke1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#000000" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="smoke2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#000000" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="innerGlow" cx="45%" cy="42%" r="35%">
+      <stop offset="0%" stop-color="#555555" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#333333" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="reflection" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="edgeRing" cx="50%" cy="50%" r="50%">
+      <stop offset="85%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="94%" stop-color="#333333" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#555555" stop-opacity="0.1"/>
+    </radialGradient>
+    <clipPath id="orbClip">
+      <circle cx="256" cy="256" r="220"/>
+    </clipPath>
+  </defs>
+  <circle cx="256" cy="256" r="220" fill="url(#orbGrad)"/>
+  <g clip-path="url(#orbClip)">
+    <circle cx="240" cy="235" r="160" fill="url(#innerGlow)"/>
+    <ellipse cx="200" cy="225" rx="90" ry="60" fill="url(#smoke1)" transform="rotate(-15, 200, 225)"/>
+    <ellipse cx="310" cy="285" rx="70" ry="50" fill="url(#smoke2)" transform="rotate(20, 310, 285)"/>
+    <ellipse cx="250" cy="320" rx="55" ry="38" fill="url(#smoke1)" transform="rotate(-8, 250, 320)"/>
+  </g>
+  <circle cx="256" cy="256" r="220" fill="url(#edgeRing)"/>
+  <circle cx="256" cy="256" r="218" fill="none" stroke="#444" stroke-width="2" opacity="0.25"/>
+  <ellipse cx="215" cy="165" rx="60" ry="20" fill="url(#reflection)" transform="rotate(-12, 215, 165)"/>
+  <circle cx="240" cy="188" r="6" fill="white" opacity="0.35"/>
+</svg>

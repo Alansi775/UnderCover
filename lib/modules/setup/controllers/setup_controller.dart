@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/services/game_controller.dart';
 import '../../../app/routes/app_routes.dart';
+import '../../../core/services/music_service.dart';
 
 class SetupController extends GetxController {
   final playerCount = 3.obs;
@@ -101,7 +102,8 @@ class SetupController extends GetxController {
     }
     final gameCtrl = Get.find<GameController>();
     gameCtrl.createGame(playerNames.toList());
-
+    
+    Get.find<MusicService>().fadeOutAndStop();
     Get.offNamed(Routes.roleReveal);
   }
 }

@@ -12,12 +12,16 @@ import '../../modules/voting/views/voting_view.dart';
 import '../../modules/voting/views/elimination_view.dart';
 import '../../modules/result/controllers/result_controller.dart';
 import '../../modules/result/views/result_view.dart';
+import '../../modules/setup/controllers/home_controller.dart';
 
 class AppPages {
   static final pages = [
     GetPage(
       name: Routes.home,
       page: () => const HomeView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => HomeController());
+      }),
     ),
     GetPage(
       name: Routes.setup,

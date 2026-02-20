@@ -8,6 +8,7 @@ import 'app/routes/app_routes.dart';
 import 'app/themes/app_theme.dart';
 import 'core/constants/constants.dart';
 import 'core/services/game_controller.dart';
+import 'core/services/music_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,7 @@ void main() async {
 
   // Register core controllers so routes work even on refresh/direct navigation
   Get.put(GameController(), permanent: true);
+  Get.put(MusicService(), permanent: true);
 
   runApp(const UndercoverApp());
 }
