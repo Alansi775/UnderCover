@@ -107,7 +107,7 @@ A glassmorphic overlay explains the game rules in five concise steps. The overla
 
 ### 4. Player Setup
 
-![Player Setup](assets/screenshots/SELECTING3PLAYERS OR MOREPAGEBUTNOWISELECTED3ONLY1STONEISA2NDB,3RDCTHOSEARETHEIRNAMESNOW.png)
+![Player Setup](assets/screenshots/SELECTING3PLAYERSORMOREPAGEBUTNOWISELECTED3ONLY1STONEISA2NDB,3RDCTHOSEARETHEIRNAMESNOW.png)
 
 Players configure the game by selecting the number of participants (3 to 12) and entering each player's name. Validation ensures all names are filled and unique before proceeding.
 
