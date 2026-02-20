@@ -119,7 +119,7 @@ Each player views their assigned role and secret word privately using a pass-the
 
 The device prompts the group to pass it to the next player. Only when that player taps "Reveal My Role" does their secret information appear.
 
-![A is Undercover](assets/screenshots/HEISUNDERCOVERNANDHISWORDISPOEMTHIS IS A.png)
+![A is Undercover](assets/screenshots/HEISUNDERCOVERNANDHISWORDISPOEMTHISISA.png)
 
 Player A is assigned the Undercover role with the word "Poem". The role badge and word are displayed prominently with color-coded indicators (red for Undercover, blue for Citizen).
 
