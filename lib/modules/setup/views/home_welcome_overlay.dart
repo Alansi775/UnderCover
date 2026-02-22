@@ -43,29 +43,35 @@ class HomeWelcomeOverlay extends StatelessWidget {
 
   Widget _buildIcon() {
     return Container(
-      width: 60,
-      height: 60,
+      width: 50,
+      height: 50,
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(18),
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          center: const Alignment(-0.3, -0.35),
+          radius: 0.85,
+          colors: [
+            Colors.white.withOpacity(0.95),
+            Colors.white.withOpacity(0.6),
+            Colors.white.withOpacity(0.3),
+            const Color(0xFFb0b0b0),
+          ],
+          stops: const [0.0, 0.25, 0.55, 1.0],
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.white.withOpacity(0.1),
-            blurRadius: 40,
-            spreadRadius: 10,
+            blurRadius: 50,
+            spreadRadius: 15,
           ),
         ],
       ),
-      child: const Icon(
-        Icons.visibility_off_rounded,
-        size: 28,
-        color: AppColors.black,
-      ),
     )
         .animate()
-        .fadeIn(duration: 800.ms)
+        .fadeIn(duration: 1000.ms)
         .scale(
-            begin: const Offset(0.8, 0.8),
+            begin: const Offset(0.5, 0.5),
+            duration: 1200.ms,
             curve: Curves.easeOut);
   }
 
@@ -142,14 +148,21 @@ class HomeWelcomeOverlay extends StatelessWidget {
     return Text(
       'Tap to begin',
       style: GoogleFonts.inter(
-        fontSize: 10,
-        color: AppColors.gray700,
-        letterSpacing: 2,
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        color: AppColors.gray600,
+        letterSpacing: 4,
       ),
     )
-        .animate(onPlay: (c) => c.repeat(reverse: true))
-        .fadeIn(delay: 1200.ms)
+        .animate()
+        .fadeIn(delay: 1400.ms, duration: 800.ms)
         .then()
-        .fadeOut(duration: 1500.ms);
+        .animate(onPlay: (c) => c.repeat(reverse: true))
+        .fade(
+          begin: 1,
+          end: 0.3,
+          duration: 2000.ms,
+          curve: Curves.easeInOut,
+        );
   }
 }
